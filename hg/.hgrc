@@ -1,0 +1,42 @@
+[ui]
+username = Ketan Padegaonkar <KetanPadegaonkar@gmail.com>
+
+[alias]
+rnba = revert --no-backup --all
+rnb = revert --no-backup
+
+[extensions]
+hgext.rebase =
+hgext.graphlog =
+hgext.extdiff =
+hgext.forest=
+hgext.mq =
+color = 
+purge =
+
+[diff]
+git = true
+
+[extdiff]
+cmd.kdiff3 =
+
+[merge-tools]
+kdiff3.args = $base $local $other -o $output
+
+# [color]
+# status.modified = magenta bold
+# status.added = green bold
+# status.removed = red bold
+# status.deleted = cyan bold
+# status.unknown = blue bold
+# status.ignored = black bold
+# 
+# qseries.applied = blue bold underline
+# qseries.unapplied = black bold
+# qseries.missing = red bold
+
+[pager]
+pager = LESS='FSRX' less
+
+[extensions]
+pager =
