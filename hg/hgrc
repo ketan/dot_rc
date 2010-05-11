@@ -13,6 +13,7 @@ hgext.forest=
 hgext.mq =
 color = 
 purge =
+mq =
 
 [diff]
 git = true
@@ -36,7 +37,13 @@ kdiff3.args = $base $local $other -o $output
 # qseries.missing = red bold
 
 [pager]
-pager = LESS='FSRX' less
+pager = LESS='FRX' less
+
+# disable any 'broken pipe' error messages
+quite = true
 
 [extensions]
 pager =
+
+[extensions]
+progress =
