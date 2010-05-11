@@ -9,6 +9,10 @@ export PATH=$HOME/.gem/ruby/1.8/bin:$PATH # ruby gems bin dir
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH 	# macports
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
 
-export PATH=$HOME/projects/dev/apache-maven-2.2.1/bin:$PATH 	# maven :(
+export MVN2_HOME=$HOME/projects/dev/apache-maven-2.2.1
+export MVN3_HOME=$HOME/projects/dev/apache-maven-3.0-alpha-7
+
+export PATH=$MVN2_HOME/bin:$PATH 	# maven :(
+alias mvn3='$MVN3_HOME/bin/mvn'
 
 export HOSTNAME="`hostname`"

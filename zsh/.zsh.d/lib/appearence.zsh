@@ -1,15 +1,7 @@
-###
-# Stuff for normal completion
-###
-zstyle ':completion:*' completer _expand _complete _ignored
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' menu select=0
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit && compinit
-
+#!/bin/zsh
+if [ -z "$PS1" ]; then
+  return
+fi
 ###
 # history stuff goes here
 ###
@@ -18,7 +10,13 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 bindkey -e				# use emacs style keys
-# End of lines configured by zsh-newuser-install
+
+# filter for less
+export LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
+
+export PAGER='less'
+export EDITOR='vim'
+export GEM_OPEN_EDITOR='mate'
 
 setopt AUTO_CD                # cd if no matching command
 setopt AUTO_PARAM_SLASH       # adds slash at end of tabbed dirs
@@ -28,40 +26,6 @@ setopt LIST_TYPES             # show file types in list
 setopt MARK_DIRS              # adds slash to end of completed dirs
 # setopt SHARE_HISTORY          # share history between open shells
 setopt HIST_IGNORE_ALL_DUPS	  # ignore all dups from history
-
-# filter for less
-export LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
-
-export PAGER='less'
-export EDITOR='vim'
-
-###
-# alt+bksp stops on these characters
-###
-export WORDCHARS="${WORDCHARS:s#/#}"	# alt+bksp stops at '/'
-export WORDCHARS="${WORDCHARS:s#-#}"	# alt+bksp stops at '-'
-export WORDCHARS="${WORDCHARS:s#.#}"	# alt+bksp stops at '.'
-
-###
-# ssh host completion
-###
-zstyle -e ':completion:*:(ssh|scp):*' hosts 'reply=(
-  ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) \
-       /dev/null)"}%%[# ]*}//,/ }
-  ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2>/dev/null))"}%%\#*}
-)'
-
-compctl -k hostnames ping sftp host ssh
-
-# some aliases
-alias ls='ls -hF --color=auto'
-alias vi='vim'
-alias less='less -R'
-alias -g ..='..'
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-
 
 autoload colors && colors
 # autoload zsh/terminfo			# don't know if this is needed
@@ -98,15 +62,3 @@ $PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!
 "
 }
 
-for i in $HOME/projects/*/*; do
-	dir=`basename $i`
-	hash -d $dir=$i
-done
-
-
-function releng(){
-	dir=`ls -d *releng* 2>/dev/null`
-	if [[ -d "$dir" ]]; then
-		cd $dir
-	fi
-}

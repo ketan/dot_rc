@@ -1,0 +1,15 @@
+for config_file (~/.zsh.d/lib/*.zsh) source $config_file
+
+for i in $HOME/projects/*/*; do
+	dir=`basename $i`
+	hash -d $dir=$i
+done
+
+
+function releng(){
+	dir=`ls -d *releng* 2>/dev/null`
+	if [[ -d "$dir" ]]; then
+		cd $dir
+	fi
+}
+source /Users/ThoughtWorks/.lightning/functions.sh
