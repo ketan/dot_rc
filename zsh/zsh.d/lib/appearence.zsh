@@ -16,6 +16,7 @@ export LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
 
 export PAGER='less'
 export EDITOR='vim'
+export GEM_EDITOR='mate'
 export GEM_OPEN_EDITOR='mate'
 
 setopt AUTO_CD                # cd if no matching command

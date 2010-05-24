@@ -1,5 +1,7 @@
 #!/bin/zsh
-
+if [ -z "$PS1" ]; then
+  return
+fi
 # some aliases
 alias ls='ls -hF --color=auto'
 alias vi='vim'
