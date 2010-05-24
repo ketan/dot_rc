@@ -1,10 +1,11 @@
+#!/bin/zsh
 ###
 # setup exports
 ###
 export PATH=/usr/local/bin:$PATH					# for some reasons this is not on path
 export PATH=$HOME/bin:$PATH							# my personal home directory
 
-export PATH=$HOME/.gem/ruby/1.8/bin:$PATH # ruby gems bin dir
+# export PATH=$HOME/.gem/ruby/1.8/bin:$PATH # ruby gems bin dir
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH 	# macports
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
@@ -16,3 +17,5 @@ export PATH=$MVN2_HOME/bin:$PATH 	# maven :(
 alias mvn3='$MVN3_HOME/bin/mvn'
 
 export HOSTNAME="`hostname`"
+
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
