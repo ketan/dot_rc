@@ -1,8 +1,6 @@
 set nocompatible        " not compatible with vim
 
 set nobackup            " keep a backup file
-set history=50          " keep 50 lines of command line history
-set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set incsearch           " do incremental searching
 
@@ -56,9 +54,9 @@ map <C-H> <C-W>h
 map <C-L> <C-W>l
 
 " Default to using a stack style editing (current window always max)
-set winminheight=0
-au VimEnter * set winheight=999
-set splitbelow
+" set winminheight=0
+" au VimEnter * set winheight=999
+" set splitbelow
 
 " Keep 2 lines of context when scrolling
 set scrolloff=2
@@ -188,5 +186,7 @@ set laststatus=2  " Always show status line.
 set mousehide  " Hide mouse after chars typed
 set mouse=a  " Mouse in all modes
 
-
 helptags ~/.vim/doc    " add local help!
+
+
+set statusline=%{fugitive#statusline()}
