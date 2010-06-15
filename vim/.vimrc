@@ -187,3 +187,6 @@ set laststatus=2  " Always show status line.
 " gvim specific
 set mousehide  " Hide mouse after chars typed
 set mouse=a  " Mouse in all modes
+
+
+helptags ~/.vim/doc    " add local help!
