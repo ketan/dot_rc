@@ -31,3 +31,6 @@ alias etts='mate app config lib db public script spec test vendor/plugins vendor
 
 # Editor Ruby file in TextMate
 alias mr='mate CHANGELOG app config db lib public script spec test'
+
+alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
+alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
