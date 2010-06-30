@@ -7,7 +7,7 @@ export PATH=$HOME/bin:$PATH							# my personal home directory
 
 # export PATH=$HOME/.gem/ruby/1.8/bin:$PATH # ruby gems bin dir
 
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH 	# macports
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql84/bin:$PATH 	# macports
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
 
 export MVN2_HOME=$HOME/projects/dev/apache-maven-2.2.1
