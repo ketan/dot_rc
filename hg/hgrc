@@ -3,7 +3,7 @@ username = Ketan Padegaonkar <KetanPadegaonkar@gmail.com>
 
 [alias]
 rnba = revert --no-backup --all
-rnb = revert --no-backup
+revert = revert --no-backup
 
 [extensions]
 hgext.rebase =
