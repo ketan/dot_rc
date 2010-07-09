@@ -2,6 +2,7 @@
 if [ -z "$PS1" ]; then
   return
 fi
+
 # some aliases
 alias ls='ls -hF --color=auto'
 alias vi='vim'
@@ -11,26 +12,22 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
-
 # RoR stuff
-alias ss='ruby script/server'
-alias sd='ruby script/server --debugger'
-alias sc='ruby script/console'
+alias ss='script/server'
+alias sd='script/server --debugger'
+alias sc='script/console'
 
-alias sg='ruby script/generate'
-alias sd='ruby script/destroy'
-alias sp='ruby script/plugin'
+alias sg='script/generate'
+alias sd='script/destroy'
+alias sp='script/plugin'
 
 alias rdbm='rake db:migrate'
 alias devlog='tail -f log/development.log'
 
 # TextMate
-alias ett='mate app config lib db public spec test Rakefile Capfile Todo &'
-alias etp='mate app config lib db public spec test vendor/plugins vendor/gems Rakefile Capfile Todo &'
-alias etts='mate app config lib db public script spec test vendor/plugins vendor/gems Rakefile Capfile Todo &'
-
-# Editor Ruby file in TextMate
-alias mr='mate CHANGELOG app config db lib public script spec test'
+alias mrails="mate .gitignore .hgignore app config lib db features public script spec test vendor Rakefile Capfile Todo"
 
 alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
 alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
+
+alias reload="source ~/.zshrc"
