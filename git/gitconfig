@@ -7,6 +7,8 @@
 [alias]
 	co = checkout
 	st = status
+	addremove = !"git add . && git ls-files --deleted | xargs --no-run-if-empty git rm"
+	arm = !git addremove
 [color]
 	branch = auto
 	diff = auto
