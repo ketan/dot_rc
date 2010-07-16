@@ -9,6 +9,8 @@
 	st = status
 	addremove = !"git add . && git ls-files --deleted | xargs --no-run-if-empty git rm"
 	arm = !git addremove
+	server = !"rackup $HOME/bin/git-serve/config.ru"
+	browse = instaweb --httpd=webrick
 [color]
 	branch = auto
 	diff = auto
@@ -28,3 +30,7 @@
 	untracked = cyan
 [merge]
 	tool = opendiff
+[daemon]
+  receivepack = true
+[receive]
+	denycurrentbranch = ignore
