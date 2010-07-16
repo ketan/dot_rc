@@ -14,14 +14,18 @@ alias -g .....='../../../..'
 
 # RoR stuff
 alias ss='script/server'
+alias ssprod='script/server -eproduction'
 alias sd='script/server --debugger'
+
 alias sc='script/console'
+alias scprod='script/console production'
 
 alias sg='script/generate'
 alias sd='script/destroy'
 alias sp='script/plugin'
 
 alias rdbm='rake db:migrate'
+alias rdbmprod='rake db:migrate RAILS_ENV=production'
 alias devlog='tail -f log/development.log'
 
 # TextMate
