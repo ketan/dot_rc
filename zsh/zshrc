@@ -1,5 +1,5 @@
 #!/bin/zsh
-for config_file (~/.zsh.d/lib/*.zsh) source $config_file
+for config_file (~/.zsh/zsh.d/lib/*.zsh) source $config_file
 
 for i in $HOME/projects/*/*; do
 	dir=`basename $i`
