@@ -57,9 +57,8 @@ parse_git_branch() {
 # Called before prompt shown, shows the git/mercurial branch
 ###
 function precmd {
-	export PS1="
-	
-$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!.#.$)
-"
+  export PS1="
+  
+$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!.#.$) "
 }
 
