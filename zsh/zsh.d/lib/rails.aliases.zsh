@@ -17,6 +17,7 @@ function r(){
 alias ss='r server'
 alias sc='r console'
 alias sd='r destroy'
+alias sg='r generate'
 alias sd='r plugin'
 
 alias ssprod='ss -eproduction'
