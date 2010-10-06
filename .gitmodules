@@ -4,3 +4,21 @@
 [submodule "vim/externals/rails"]
 	path = vim/externals/rails
 	url = http://github.com/tpope/vim-rails.git
+[submodule "vim/externals/nerdtree"]
+	path = vim/externals/nerdtree
+	url = git@github.com:ketan/nerdtree.git
+[submodule "vim/externals/nerdcommenter"]
+	path = vim/externals/nerdcommenter
+	url = git@github.com:ketan/nerdcommenter.git
+[submodule "vim/externals/snipmate.vim"]
+	path = vim/externals/snipmate.vim
+	url = git@github.com:ketan/snipmate.vim.git
+[submodule "vim/.vim/snippets"]
+	path = vim/.vim/snippets
+	url = git@github.com:ketan/snipmate-snippets.git
+[submodule "vim/.vim/vim-surround"]
+	path = vim/.vim/vim-surround
+	url = git@github.com:ketan/vim-surround.git
+[submodule "vim/externals/vim-surround"]
+	path = vim/externals/vim-surround
+	url = git@github.com:ketan/vim-surround.git

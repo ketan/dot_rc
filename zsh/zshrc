@@ -1,4 +1,9 @@
 #!/bin/zsh
+
+if [ -z "$PS1" ]; then
+  return
+fi
+
 for config_file (~/.zsh/zsh.d/lib/*.zsh) source $config_file
 
 for i in $HOME/projects/*/*; do
@@ -13,3 +18,4 @@ function releng(){
 		cd $dir
 	fi
 }
+

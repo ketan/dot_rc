@@ -1,0 +1,3 @@
+" command-T on macvim :)
+macm File.New\ Tab key=<nop>
+nmap <D-t> :CommandTFlush<CR>:CommandT<CR>

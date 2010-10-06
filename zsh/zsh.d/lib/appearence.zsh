@@ -33,32 +33,35 @@ autoload colors && colors
 if [[ "$terminfo[colors]" -ge 8 ]]; then
   colors
 fi
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-  eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-  eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
-  (( count = $count + 1 ))
-done
+
+# set some colors
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE BLACK; do
+    eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'        
+    eval PR_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+done                                                
+PR_RESET="%{${reset_color}%}";
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
-parse_git_branch() {
-	branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/git (\1)/'`
-	if [[ -n $branch ]]; then
-		echo $branch
-		return
-	fi
-	
-	branch=`hg branch 2>/dev/null`
-	if [[ -n $branch ]]; then
-		echo $branch | sed -e 's/^/hg (/' -e 's/$/)/'
-	 	return
-	fi
-}
-###
-# Called before prompt shown, shows the git/mercurial branch
-###
-function precmd {
-  export PS1="
-  
-$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!.#.$) "
-}
+# parse_git_branch() {
+#   branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/git (\1)/'`
+#   if [[ -n $branch ]]; then
+#     echo $branch
+#     return
+#   fi
+#   
+#   branch=`hg branch 2>/dev/null`
+#   if [[ -n $branch ]]; then
+#     echo $branch | sed -e 's/^/hg (/' -e 's/$/)/'
+#     return
+#   fi
+# }
+# ###
+# # Called before prompt shown, shows the git/mercurial branch
+# ###
+# function precmd {
+#   export PS1="
+#   
+# ${PR_BLUE}$(rvm-prompt)${PR_NO_COLOR}
+# $PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!.#.$) "
+# }
 

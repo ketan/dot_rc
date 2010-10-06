@@ -10,8 +10,6 @@ map Q gq                " Don't use Ex mode, use Q for formatting
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-set mouse=a             " enable mouse          
-                                                
 syntax on               "enable syntax highlight
 set hlsearch            "enable highlight search
 
@@ -39,6 +37,27 @@ autocmd BufReadPost *
   \ endif
 augroup END
 
+augroup __RUBY
+  au!
+  function! ExecuteRubyUnitTest()
+    let s:line_no = search('^\s*def\s*test_', 'bcnW')
+    if s:line_no
+      exec '!_vim_ruby -Ilib,test % -n ' . split(getline(s:line_no))[1]
+    else
+      echo "Can't find a test!"
+    endif
+  endfunction
+  
+  " ruby shortcuts
+  autocmd BufReadPost *.rb imap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test %<CR>
+  autocmd BufReadPost *.rb nmap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test %<CR>
+
+  autocmd BufReadPost *_test.rb imap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
+  autocmd BufReadPost *_test.rb nmap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
+  autocmd FileType ruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+  
+augroup END
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -61,7 +80,7 @@ map <C-L> <C-W>l
 " Keep 2 lines of context when scrolling
 set scrolloff=2
 
-set ignorecase
+"set ignorecase
 set smartcase
 
 set directory=~/.vim/swp/   " Don't litter the filesystem with .swp files
@@ -90,7 +109,7 @@ map <Up> gk
 map <Down> gj
 
 " Goto file in another window and navigate back to this window
-map gf <C-W><C-F><C-K>
+nmap <M-F><M-T> <C-W><C-F><C-K>
 
 " Execute macro in the 'q' register.
 map <C-Q> @q
@@ -99,8 +118,26 @@ map <C-Q> @q
 nmap [[ [{
 nmap ]] ]}
 
+" map nerd tree
 let Tlist_Close_On_Select=1
-nmap <M-?> :NERDTreeToggle<CR>
+nmap ,n :NERDTreeClose<CR>:NERDTreeToggle<CR>
+nmap ,m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nmap ,N :NERDTreeClose<CR>
+
+" Store the bookmarks file
+let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+
+" Don't display these kinds of files
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+
+let NERDTreeShowBookmarks=1       " Show the bookmarks table on startup
+let NERDTreeShowFiles=1           " Show hidden files, too
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1          " Quit on opening files from the tree
+let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
+let NERDTreeMouseMode=2           " Use a single click to fold/unfold directories
+                                  " and a double click to open files
+
 
 filetype plugin on
 
@@ -188,5 +225,22 @@ set mouse=a  " Mouse in all modes
 
 helptags ~/.vim/doc    " add local help!
 
+set guifont=Monaco:h15   " fonts for macvim
 
 set statusline=%{fugitive#statusline()}
+
+" display EOL character
+set list lcs=eol:¬,tab:··
+" the color of the EOL character
+hi NonText guifg=gray30 guibg=grey20   
+
+let g:CommandTMatchWindowAtTop=1
+let g:CommandTAcceptSelectionMap='<M-CR>'
+let g:CommandTAcceptSelectionTabMap='<CR>'
+
+" press f2 to disable all smartness when pasting
+set pastetoggle=<F2>
+
+" no more :wq, just ;wq
+nnoremap ; :
+

@@ -1,3 +1,4 @@
+VIM_DIR=File.expand_path('~/.vim/')
 def symlink(src, context, dest)
   dest = File.expand_path(dest)
   src = File.expand_path(File.join(File.dirname(context), src))

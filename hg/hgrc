@@ -10,6 +10,7 @@ hgext.rebase =
 hgext.graphlog =
 hgext.extdiff =
 #hgext.forest=
+hgext.forest=/opt/hgforest-crew/forest.py
 hgext.mq =
 color = 
 purge =

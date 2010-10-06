@@ -2,6 +2,9 @@
 if [ -z "$PS1" ]; then
   return
 fi
+
+fpath=(~/.zsh/zsh.d/completion $fpath)
+
 ###
 # Stuff for normal completion
 ###
@@ -31,3 +34,5 @@ zstyle -e ':completion:*:(ssh|scp):*' hosts 'reply=(
 )'
 
 compctl -k hostnames ping sftp host ssh
+
+
