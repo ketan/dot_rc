@@ -7,8 +7,8 @@ fi
 for config_file (~/.zsh/zsh.d/lib/*.zsh) source $config_file
 
 for i in $HOME/projects/*/*; do
-	dir=`basename $i`
-	hash -d $dir=$i
+  dir=$i:t
+  hash -d $dir=$i
 done
 
 

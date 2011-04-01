@@ -225,7 +225,7 @@ set mouse=a  " Mouse in all modes
 
 helptags ~/.vim/doc    " add local help!
 
-set guifont=Monaco:h15   " fonts for macvim
+set guifont=Monaco:h14   " fonts for macvim
 
 set statusline=%{fugitive#statusline()}
 
@@ -243,4 +243,21 @@ set pastetoggle=<F2>
 
 " no more :wq, just ;wq
 nnoremap ; :
+
+
+" CMD-[1-9] for switching tabs
+nmap <D-1> :tabn 1<CR> 
+nmap <D-2> :tabn 2<CR> 
+nmap <D-3> :tabn 3<CR> 
+nmap <D-4> :tabn 4<CR> 
+nmap <D-5> :tabn 5<CR> 
+nmap <D-6> :tabn 6<CR> 
+nmap <D-7> :tabn 7<CR> 
+nmap <D-8> :tabn 8<CR> 
+nmap <D-9> :tabn 9<CR> 
+
+" switch to previous tab using CMD-0
+let g:lasttab = 1
+nmap <D-0> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 

@@ -14,6 +14,11 @@ export MVN2_HOME=$HOME/projects/dev/apache-maven-2.2.1
 export MVN3_HOME=$HOME/projects/dev/apache-maven-3.0-beta-3
 
 export PATH=$MVN2_HOME/bin:$PATH 	# maven :(
+
+export PATH=$PATH:/usr/texbin
+
+export PATH=/opt/local/libexec/gnubin:$PATH
+
 alias mvn3='$MVN3_HOME/bin/mvn'
 
 export HOSTNAME="`hostname`"

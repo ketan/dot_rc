@@ -29,4 +29,4 @@ alias rdbmprod='rake db:migrate RAILS_ENV=production'
 alias devlog='tail -f log/development.log'
 
 # TextMate
-alias mrails="mate .gitignore .hgignore app config lib db features public script spec test vendor Rakefile Capfile Todo"
+alias mrails="mate .gitignore .hgignore app config lib db features public script spec test vendor Rakefile Capfile Todo Gemfile* ./j*"

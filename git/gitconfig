@@ -1,16 +1,19 @@
-[github]
-	user = ketan
-	token = 47482877f97f18d0c4bb3a2573d3ecbb
 [user]
 	name = Ketan Padegaonkar
 	email = KetanPadegaonkar@gmail.com
 [alias]
 	co = checkout
+	ci = commit
 	st = status
-	addremove = !"git add . && git ls-files --deleted | xargs --no-run-if-empty git rm"
+	br = branch
+	addremove = !"git add --all"
 	arm = !git addremove
 	server = !"rackup $HOME/bin/git-serve/config.ru"
 	browse = instaweb --httpd=webrick
+	lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
 [color]
 	branch = auto
 	diff = auto
@@ -34,3 +37,6 @@
   receivepack = true
 [receive]
 	denycurrentbranch = ignore
+[core]
+	excludesfile = /Users/ThoughtWorks/.gitignore
+
