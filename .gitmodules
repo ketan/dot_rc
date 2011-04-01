@@ -22,3 +22,6 @@
 [submodule "vim/externals/vim-surround"]
 	path = vim/externals/vim-surround
 	url = git@github.com:ketan/vim-surround.git
+[submodule "vim/externals/haml"]
+	path = vim/externals/haml
+	url = https://github.com/tpope/vim-haml.git
