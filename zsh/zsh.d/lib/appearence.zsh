@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 if [ -z "$PS1" ]; then
   return
 fi
@@ -12,7 +13,14 @@ SAVEHIST=10000
 bindkey -e				# use emacs style keys
 
 # filter for less
-export LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
+LESSOPEN=''
+if [ -f /usr/bin/lesspipe ]; then
+  LESSOPEN="/usr/bin/lesspipe"
+elif [ -f /opt/local/bin/lesspipe.sh ]; then
+  LESSOPEN="/opt/local/bin/lesspipe.sh"
+fi
+export LESSOPEN="| $LESSOPEN %s"
+
 
 export PAGER='less'
 export EDITOR='vim'
