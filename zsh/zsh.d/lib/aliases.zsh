@@ -4,6 +4,7 @@ if [ -z "$PS1" ]; then
 fi
 
 # some aliases
+alias ls='ls -hG'
 alias vi='vim'
 alias less='less -R'
 alias -g ..='..'
@@ -35,3 +36,4 @@ alias ls='ls --color=auto -hF'
 # 
 # alias du='gdu'
 # alias df='gdf'
+alias ikill="ps axu | grep Developer | grep -v Xcode.app | grep -v grep | awk '{print \$2}' | xargs kill -9"

@@ -30,3 +30,10 @@ alias devlog='tail -f log/development.log'
 
 # TextMate
 alias mrails="mate .gitignore .hgignore app config lib db features public script spec test vendor Rakefile Capfile Todo Gemfile* ./j*"
+function m(){
+  if [[ -d "config" && -d "app" && -d 'public' ]]; then
+    mate .gitignore .hgignore app config lib db features public script spec test vendor/plugins vendor/ruby Rakefile Capfile Todo Gemfile Gemfile.lock $*
+  else
+    mate $*
+  fi
+}

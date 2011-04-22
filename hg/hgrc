@@ -11,10 +11,15 @@ hgext.graphlog =
 hgext.extdiff =
 hgext.forest=/opt/hgforest-crew/forest.py
 hgext.fetch=
+#hgext.forest=
 hgext.mq =
+hgext.hgshelve=
 color = 
 purge =
 mq =
+hgext.hgshelve=$HOME/bin/hgshelve.py
+progress =
+pager =
 
 [diff]
 git = true
@@ -42,9 +47,3 @@ pager = LESS='FRX' less
 
 # disable any 'broken pipe' error messages
 quite = true
-
-[extensions]
-pager =
-
-[extensions]
-progress =
