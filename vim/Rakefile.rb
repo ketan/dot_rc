@@ -3,6 +3,7 @@ task :vim do
   puts "** Installing vim config..."
   symlink('vimrc', __FILE__, '~/.vimrc')
   symlink('gvimrc', __FILE__, '~/.gvimrc')
+  mkdir_p File.expand_path('~/.vim/swp')
 
   FileList["#{File.dirname(__FILE__)}/.vim/**/*.*"].reject{|f| f =~ /(.(git|hg)ignore)|README|Rake/}.each do |f|
     f.gsub!(/^\.\//, '')
