@@ -14,6 +14,26 @@ function r(){
   fi
 }
 
+
+function jr(){
+  ruby=''
+  if [ -x './jruby' ]; then
+    ruby='./jruby'
+  elif [ -x './script/jruby' ]; then
+    ruby='./script/jruby'
+  fi
+  
+  if [ -f script/rails ]; then
+    $ruby script/rails $*
+  fi
+  
+  if [ -f script/server ]; then
+    SCRIPT=$1
+    shift
+    $ruby script/$SCRIPT $*
+  fi
+}
+
 alias ss='r server'
 alias sc='r console'
 alias sd='r destroy'
@@ -24,8 +44,20 @@ alias ssprod='ss -eproduction'
 alias sd='ss --debugger'
 alias scprod='sc production'
 
+
+alias jss='jr server'
+alias jsc='jr console'
+alias jsd='jr destroy'
+alias jsg='jr generate'
+alias jsd='jr plugin'
+
+alias jssprod='jss -eproduction'
+alias jsd='jss --debugger'
+alias jscprod='jsc production'
+
 alias rdbm='rake db:migrate'
 alias rdbmprod='rake db:migrate RAILS_ENV=production'
+
 alias devlog='tail -f log/development.log'
 
 # TextMate
@@ -37,3 +69,5 @@ function m(){
     mate $*
   fi
 }
+
+alias gem_cache='(cd ~/Downloads/scache; java -cp . scache)'
