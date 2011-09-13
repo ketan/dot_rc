@@ -10,12 +10,15 @@
 	br = branch
 	addremove = !"git add --all"
 	arm = !git addremove
+	out = log origin..HEAD
 	server = !"git daemon --reuseaddr --base-path=. --export-all"
 	browse = instaweb --httpd=webrick
 	lg = log -p
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   ls = ls-files
+  cln = !"git clean -fdxn | sed -e 's/Would remove //' | grep -v 'vendor' | grep -v '.bundle' | grep -v '.metadata' | grep -v '.tmproj' | grep -v '.rvmrc' | xargs git clean -fdx"
+  clna = clean -fdx
 [color]
 	branch = auto
 	diff = auto
@@ -33,12 +36,10 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-[merge]
-	tool = opendiff
 [daemon]
   receivepack = true
 [receive]
 	denycurrentbranch = ignore
 [core]
-	excludesfile = /Users/ThoughtWorks/.gitignore
+	excludesfile = /Users/ketanpadegaonkar/.gitignore
 
