@@ -42,20 +42,29 @@ augroup __RUBY
   function! ExecuteRubyUnitTest()
     let s:line_no = search('^\s*def\s*test_', 'bcnW')
     if s:line_no
-      exec '!_vim_ruby -Ilib,test % -n ' . split(getline(s:line_no))[1]
+      exec '!_vim_ruby -Ilib,test % -n ' . split(getline(s:line_no))[1] . ' -v'
     else
       echo "Can't find a test!"
     endif
   endfunction
   
   " ruby shortcuts
-  autocmd BufReadPost *.rb imap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test %<CR>
-  autocmd BufReadPost *.rb nmap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test %<CR>
+  autocmd BufReadPost *.rb imap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
+  autocmd BufReadPost *.rb nmap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
 
   autocmd BufReadPost *_test.rb imap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
   autocmd BufReadPost *_test.rb nmap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
   autocmd FileType ruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
   
+augroup END
+
+augroup __CLOJURE
+  " clojure shortcuts
+  autocmd BufRead,BufNewFile *.clj imap <D-r> <ESC>:call vimclojure#EvalFile() %<CR>i
+  autocmd BufRead,BufNewFile *.clj nmap <D-r> <ESC>:call vimclojure#EvalFile()<CR>
+
+  autocmd BufRead,BufNewFile *.clj imap <D-R> <ESC>:call vimclojure#EvalToplevel() %<CR>i
+  autocmd BufRead,BufNewFile *.clj nmap <D-R> <ESC>:call vimclojure#EvalToplevel()<CR>
 augroup END
 
 " Convenient command to see the difference between the current buffer and the
@@ -97,8 +106,10 @@ nmap <silent> <C-S> :let &winheight = ( &winheight == 999 ? 1 : 999)<CR><C-W>=
 nmap <Space> za
 
 " Easier interaction with clipboard
-vmap <Leader>y "+y
-nmap <Leader>p "+gP
+"vmap <Leader>y "+y
+"nmap <Leader>p "+gP
+vmap ,y "+y
+nmap ,p "+gP
 
 " Select some text and search with it
 vmap // y/<C-R>"<CR>
@@ -143,8 +154,14 @@ filetype plugin on
 
 let html_use_css = 1
 let g:lisp_rainbow = 1
-let g:clj_paren_rainbow = 1
-let g:clj_highlight_builtins = 1
+
+" let vimclojure#ParenRainbow = 1
+let vimclojure#HighlightBuiltins = 1
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = "/Users/ketanpadegaonkar/bin/ng"
+let vimclojure#SplitPos = 'bottom'
+let vimclojure#SplitSize = 10
+
 let g:xml_syntax_folding=1
 let NERDTreeQuitOnOpen = 1
 
@@ -217,8 +234,9 @@ set mat=5  " Bracket blinking.
 
 set novisualbell  " No blinking .
 set noerrorbells  " No noise.
+set t_vb= 
 set laststatus=2  " Always show status line.
- 
+
 " gvim specific
 set mousehide  " Hide mouse after chars typed
 set mouse=a  " Mouse in all modes
@@ -260,4 +278,9 @@ nmap <D-9> :tabn 9<CR>
 let g:lasttab = 1
 nmap <D-0> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+
+set timeoutlen=1000 "set the key delay when using shortcuts
+
+set exrc            " enable per-directory .vimrc files
 
