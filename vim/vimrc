@@ -26,6 +26,8 @@ au!
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
 
+autocmd BufEnter * Rvm "Use rvm when entering a buffer
+
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
@@ -49,11 +51,11 @@ augroup __RUBY
   endfunction
   
   " ruby shortcuts
-  autocmd BufReadPost *.rb imap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
-  autocmd BufReadPost *.rb nmap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
+"  autocmd BufReadPost *.rb imap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
+"  autocmd BufReadPost *.rb nmap <D-r> <ESC>:w<CR>:!_vim_ruby -Ilib,test % -v<CR>
 
-  autocmd BufReadPost *_test.rb imap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
-  autocmd BufReadPost *_test.rb nmap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
+"  autocmd BufReadPost *_test.rb imap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
+"  autocmd BufReadPost *_test.rb nmap <D-R> <ESC>:call ExecuteRubyUnitTest()<CR>
   autocmd FileType ruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
   
 augroup END
@@ -149,7 +151,6 @@ let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
 let NERDTreeMouseMode=2           " Use a single click to fold/unfold directories
                                   " and a double click to open files
 
-
 filetype plugin on
 
 let html_use_css = 1
@@ -198,6 +199,8 @@ map <silent> <m-n> :cn <cr>
 
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
+" enable rails menus
+let g:rails_menu=2
 
 set cf                      " Enable error files & error jumping.
 set clipboard+=unnamed      " Yanks go on clipboard instead.
@@ -245,7 +248,7 @@ helptags ~/.vim/doc    " add local help!
 
 set guifont=Monaco:h14   " fonts for macvim
 
-set statusline=%{fugitive#statusline()}
+set statusline=%{fugitive#statusline()}\ <%F%h%m%r%h%w%y\ %{&ff}\ %{exists('g:loaded_rvm')?rvm#statusline():''}%=\ %l:%c%V\ %L\ %P
 
 " display EOL character
 set list lcs=eol:¬,tab:··
@@ -263,24 +266,48 @@ set pastetoggle=<F2>
 nnoremap ; :
 
 
-" CMD-[1-9] for switching tabs
-nmap <D-1> :tabn 1<CR> 
-nmap <D-2> :tabn 2<CR> 
-nmap <D-3> :tabn 3<CR> 
-nmap <D-4> :tabn 4<CR> 
-nmap <D-5> :tabn 5<CR> 
-nmap <D-6> :tabn 6<CR> 
-nmap <D-7> :tabn 7<CR> 
-nmap <D-8> :tabn 8<CR> 
-nmap <D-9> :tabn 9<CR> 
-
-" switch to previous tab using CMD-0
-let g:lasttab = 1
-nmap <D-0> :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-
 set timeoutlen=1000 "set the key delay when using shortcuts
 
 set exrc            " enable per-directory .vimrc files
+
+"Persistent undo
+try
+  if MySys() == "windows"
+    set undodir=C:\Windows\Temp
+  else
+    set undodir=~expand('$HOME/.vim/tmp')
+  endif
+
+  set undofile
+catch
+endtry
+
+" Rails configuration
+autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
+autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+autocmd User Rails map <Leader>p :Rstep<CR>
+autocmd User Rails map <Leader>sp :RSstep<CR>
+autocmd User Rails map <Leader>tp :RTstep<CR>
+autocmd User Rails map <Leader>m :Rmodel<CR>
+autocmd User Rails map <Leader>c :Rcontroller<CR>
+autocmd User Rails map <Leader>v :Rview<CR>
+autocmd User Rails map <Leader>u :Runittest<CR>
+autocmd User Rails map <Leader>f :Rfunctionaltest<CR>
+autocmd User Rails map <Leader>i :Rintegrationtest<CR>
+autocmd User Rails map <Leader>h :Rhelper<CR>
+autocmd User Rails map <Leader>tm :RTmodel<CR>
+autocmd User Rails map <Leader>tc :RTcontroller<CR>
+autocmd User Rails map <Leader>tv :RTview<CR>
+autocmd User Rails map <Leader>tu :RTunittest<CR>
+autocmd User Rails map <Leader>tf :RTfunctionaltest<CR>
+autocmd User Rails map <Leader>ti :RTintegrationtest<CR>
+autocmd User Rails map <Leader>sm :RSmodel<CR>
+autocmd User Rails map <Leader>sc :RScontroller<CR>
+autocmd User Rails map <Leader>sv :RSview<CR>
+autocmd User Rails map <Leader>su :RSunittest<CR>
+autocmd User Rails map <Leader>sf :RSfunctionaltest<CR>
+autocmd User Rails map <Leader>si :RSintegrationtest<CR>
+autocmd User Rails map <Leader>g :Rconfig<CR>
+autocmd User Rails map <Leader>sg :RSconfig<CR>
+autocmd User Rails map <Leader>tg :RTconfig<CR>
 

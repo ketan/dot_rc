@@ -12,6 +12,11 @@ namespace :vim do
   PLUGIN_URLS = YAML.load_file(File.expand_path( '../plugins.yml', __FILE__))['plugins']
   PLUGINS = PLUGIN_URLS.keys + %w(personal cscope matchit vim-spec) + PLUGINS_WITH_RAKE.keys
   DOTVIM = "#{ENV['HOME']}/.vim"
+  desc "uninstall"
+  task :uninstall do
+    rm_rf DOTVIM
+  end
+
   desc "Get latest on all plugins"
   task :preinstall do
     mkdir_p(PLUGINS_DIR)
