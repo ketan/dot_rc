@@ -40,7 +40,7 @@ namespace :vim do
   end
 
   def clone_project(name, script_url_yaml)
-    sh("git -q clone #{PLUGIN_URLS[name]['git']} #{name}") if script_url_yaml['git']
+    sh("git clone -q #{PLUGIN_URLS[name]['git']} #{name}") if script_url_yaml['git']
     sh("hg clone #{PLUGIN_URLS[name]['hg']} #{name}") if script_url_yaml['hg']
     sh("svn checkout #{PLUGIN_URLS[name]['svn']} #{name}") if script_url_yaml['svn']
   end
