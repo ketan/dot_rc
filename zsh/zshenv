@@ -2,24 +2,12 @@
 ###
 # setup exports
 ###
-export PATH=/usr/local/bin:$PATH					# for some reasons this is not on path
-export PATH=$HOME/bin:$PATH							# my personal home directory
 
-# export PATH=$HOME/.gem/ruby/1.8/bin:$PATH # ruby gems bin dir
+export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:/opt/local/lib/postgresql84/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql84/bin:$PATH 	# macports
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
 
-export MVN2_HOME=$HOME/projects/dev/apache-maven-2.2.1
-export MVN3_HOME=$HOME/projects/dev/apache-maven-3.0-beta-3
-
-export PATH=$MVN2_HOME/bin:$PATH 	# maven :(
-
 export PATH=$PATH:/usr/texbin
-
-export PATH=/opt/local/libexec/gnubin:$PATH
-
-alias mvn3='$MVN3_HOME/bin/mvn'
 
 export HOSTNAME="`hostname`"
 
