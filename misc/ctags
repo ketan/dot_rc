@@ -1,0 +1,7 @@
+-f tmp/tags
+--exclude=vendor/jruby
+--exclude=vendor/twist-libs
+--exclude=vendor/twist-test-libs
+--exclude=vendor/ruby/**/_test.rb
+--exclude=vendor/ruby/**/_spec.rb
+-R

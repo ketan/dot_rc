@@ -1,0 +1,7 @@
+--type-add=css=.scss
+--ignore-dir=vendor/jruby
+--ignore-dir=vendor/twist-libs
+--ignore-dir=vendor/twist-test-libs
+--ignore-dir=vendor/java
+--ignore-dir=vendor/cache
+

@@ -31,6 +31,8 @@ plugins:
     git: git://github.com/tpope/vim-rvm.git
   vim-unimpaired:
     git: git://github.com/tpope/vim-unimpaired.git
+  vim-repeat: #needed by unimpaired
+    git: https://github.com/tpope/vim-repeat.git
   vim-rake:
     git: git://github.com/tpope/vim-rake.git
   vim-yankring:
