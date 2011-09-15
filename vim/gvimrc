@@ -2,20 +2,21 @@ if has("gui_macvim")
 
   " command-T on macvim :)
   macmenu File.New\ Tab key=<nop>
-  map <D-t> :CommandTFlush<CR>:CommandT<CR>
+  nmap <D-t> :CommandTFlush<CR>:CommandT<CR>
   imap <D-t> <ESC>:CommandTFlush<CR>:CommandT<CR>
+
 
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
 
 
   " Command-Shift-F for Ack
-  map <D-F> :Ack<space>
-
+  map <D-F> :Ack <C-R>=expand("<cword>")<CR>
+  vmap <D-F> :Ack <C-R>=expand("<cword>")<CR>
 
   " Command-/ to toggle comments
-  map <D-/> <plug>NERDCommenterToggle<CR>
-  imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
+  map <D-/> <plug>NERDCommenterToggle
+  imap <D-/> <Esc><D-/>i
 
 
   " Command-][ to increase/decrease indentation
@@ -55,9 +56,19 @@ if has("gui_macvim")
   "All tests: CMD-R
   autocmd User Rails imap <D-r> <ESC>:Rake<CR>
   autocmd User Rails nmap <D-r> :Rake<CR>
-  
+
   "Single test: CMD+SHIFT+R
-  autocmd User Rails imap <D-R> <ESC>:exe line('.').":Rake"<CR>
-  autocmd User Rails nmap <D-R> :exe line('.').":Rake"<CR>
+  autocmd User Rails imap <D-R> <ESC>:.Rake"<CR>
+  autocmd User Rails nmap <D-R> :.Rake"<CR>
+
+  "CMD+SHIFT+T to open tagbar
+  macmenu File.Open\ Tab\.\.\. key=<nop>
+  map <D-T> :TagbarOpen<CR>
+  imap <D-T> <ESC><D-T>i
+
+  "Reload .gvimrc when saved
+  autocmd BufWritePost .vimrc source %
+  autocmd BufWritePost .vimrc source ~/.gvimrc
+  autocmd BufWritePost .gvimrc source %
 
 endif

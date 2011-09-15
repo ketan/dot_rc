@@ -141,7 +141,7 @@ nmap ,N :NERDTreeClose<CR>
 let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
 
 " Don't display these kinds of files
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '\.gem$']
 
 let NERDTreeShowBookmarks=1       " Show the bookmarks table on startup
 let NERDTreeShowFiles=1           " Show hidden files, too
@@ -255,6 +255,7 @@ set list lcs=eol:¬,tab:··
 " the color of the EOL character
 hi NonText guifg=gray30 guibg=grey20   
 
+"Command-T configuration
 let g:CommandTMatchWindowAtTop=1
 let g:CommandTAcceptSelectionMap='<M-CR>'
 let g:CommandTAcceptSelectionTabMap='<CR>'
@@ -269,18 +270,6 @@ nnoremap ; :
 set timeoutlen=1000 "set the key delay when using shortcuts
 
 set exrc            " enable per-directory .vimrc files
-
-"Persistent undo
-try
-  if MySys() == "windows"
-    set undodir=C:\Windows\Temp
-  else
-    set undodir=~expand('$HOME/.vim/tmp')
-  endif
-
-  set undofile
-catch
-endtry
 
 " Rails configuration
 autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
@@ -311,3 +300,61 @@ autocmd User Rails map <Leader>g :Rconfig<CR>
 autocmd User Rails map <Leader>sg :RSconfig<CR>
 autocmd User Rails map <Leader>tg :RTconfig<CR>
 
+" Emacs style ctrl-a & ctrl-e in insert mode
+imap <C-a> <ESC>I
+imap <C-e> <ESC>A
+
+map <C-a> ^
+map <C-e> $
+
+" enhanced mode command line completion
+set wildmenu
+set wildmode=list:longest,full "Complete longest common string, then each full match
+
+" write all files when navigating away to a different file/buffer/exec
+set autowrite
+
+" automatically reload files changed outside of vim
+set autoread
+
+" persistent undo
+set undodir=~/.vim/swp
+set undofile
+
+
+" Inser New Line
+map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
+map <Enter> o<ESC>
+set fo-=r " do not insert a comment leader after an enter, (no work, fix!!)
+
+" requires unimpaired
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+
+"Tagbar
+let g:tagbar_autoclose = 1 "autoclose on selection
+
+" Ignore certain patterns by defaulg
+set wildignore=*.class,*.o,*.tmp,*.bak,*.gem,vendor/jruby/*,vendor/twist*,vendor/**/*_spec.rb,vendor/**/*_test.rb,log/*,tmp/*
+
+" reload vimrc when saved
+autocmd BufWritePost .vimrc source %
+
+" highlight ack search terms
+let g:ackhighlight=1
+
+" Save all buffers on losing focus
+autocmd BufLeave,FocusLost * wall
+
+" Open buffers in their own tab, breaks stuff
+"autocmd BufAdd,BufNewFile * nested tab sball
+
+
+" Map CTRL-] to show tag list on multiple matches
+map <C-]> :tjump <C-R>=expand("<cword>")<CR><CR>
+imap <C-]> <ESC><C-]>
