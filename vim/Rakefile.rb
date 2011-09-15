@@ -10,7 +10,7 @@ namespace :vim do
   PLUGINS_WITH_RAKE = {'Command-T' => 'make', 'nerdtree' => 'install'}
   FOLDERS = %w(colors ftdetect ftplugin indent syntax doc plugin autoload snippets macros after ruby)
   PLUGIN_URLS = YAML.load_file(File.expand_path( '../plugins.yml', __FILE__))['plugins']
-  PLUGINS = PLUGIN_URLS.keys + %w(personal cscope matchit vim-spec) + PLUGINS_WITH_RAKE.keys
+  PLUGINS = PLUGIN_URLS.keys + %w(diff) + PLUGINS_WITH_RAKE.keys
   DOTVIM = "#{ENV['HOME']}/.vim"
   desc "uninstall"
   task :uninstall do
