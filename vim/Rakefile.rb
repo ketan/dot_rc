@@ -32,7 +32,6 @@ namespace :vim do
   end
 
   def get_latest(plugin)
-    puts "getting latest: #{plugin}"
     if File.directory?(plugin)
       cd(plugin) { update_current_dir }
     elsif PLUGIN_URLS[plugin]
@@ -41,29 +40,28 @@ namespace :vim do
   end
 
   def clone_project(name, script_url_yaml)
-    sh("git clone #{PLUGIN_URLS[name]['git']} #{name}") if script_url_yaml['git']
+    sh("git -q clone #{PLUGIN_URLS[name]['git']} #{name}") if script_url_yaml['git']
     sh("hg clone #{PLUGIN_URLS[name]['hg']} #{name}") if script_url_yaml['hg']
     sh("svn checkout #{PLUGIN_URLS[name]['svn']} #{name}") if script_url_yaml['svn']
   end
 
   def update_current_dir
-    sh('git pull origin master') if File.directory?('.git')
+    sh('git pull -q origin master') if File.directory?('.git')
     sh('hg pull && hg update') if File.directory?('.hg')
     sh('svn up') if File.directory?('.svn')
   end
 
   desc "Install the files into ~/.vim"
   task :install => :preinstall do
-    FileUtils.mkdir_p FOLDERS.map{|f| "#{DOTVIM}/#{f}" }
-    FileUtils.mkdir_p "#{DOTVIM}/tmp"
-    FileUtils.mkdir_p "#{DOTVIM}/swp"
+    mkdir_p FOLDERS.map{|f| "#{DOTVIM}/#{f}" }
+    mkdir_p "#{DOTVIM}/tmp"
+    mkdir_p "#{DOTVIM}/swp"
 
     cd PLUGINS_DIR do
       PLUGINS_WITH_RAKE.each do |plugin, command|
         if !File.directory?(plugin)
           puts "#{plugin} doesn't exist. Please run 'rake preinstall'"
         else
-          puts "making #{plugin}"
           cd(plugin) { sh "rake #{command}" }
         end
       end
@@ -74,12 +72,10 @@ namespace :vim do
         if !File.directory?(plugin)
           puts "#{plugin} doesn't exist. Please run 'rake preinstall'"
         else
-          if File.directory?("#{plugin}/.svn")
-            cd(plugin) { sh("svn export . --force #{DOTVIM}") }
-          else
-            puts "installing #{plugin}"
+          cd plugin do
+            sh("svn export . --force #{DOTVIM}") if File.directory?("#{plugin}/.svn")
             FOLDERS.each do |f|
-              cd(plugin) { FileUtils.cp_r Dir["#{f}/*"], "#{DOTVIM}/#{f}" }
+              cp_r Dir["#{f}/*"], "#{DOTVIM}/#{f}"
             end
           end
         end
@@ -101,8 +97,8 @@ namespace :vim do
       else
         echo "Skipping .#{file}, it already exists"
       fi
-    EOSCRIPT
-          )
+        EOSCRIPT
+      )
   end
 
 end
