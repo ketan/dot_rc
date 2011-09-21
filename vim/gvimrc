@@ -63,8 +63,8 @@ if has("gui_macvim")
 
   "CMD+SHIFT+T to open tagbar
   macmenu File.Open\ Tab\.\.\. key=<nop>
-  map <D-T> :TagbarOpen<CR>
-  imap <D-T> <ESC><D-T>i
+  map <D-T> :TagbarOpen<CR>/
+  imap <D-T> <ESC><D-T>
 
   "Reload .gvimrc when saved
   autocmd BufWritePost .vimrc source %
