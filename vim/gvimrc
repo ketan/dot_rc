@@ -50,7 +50,7 @@ if has("gui_macvim")
   au TabLeave * let g:lasttab = tabpagenr()
 
   " Start without the toolbar
-  " set guioptions-=T
+  set guioptions-=T
 
   "Run tests Ruby/Rails
   "All tests: CMD-R
