@@ -1,1 +1,10 @@
+---
+:update_sources: false
+:bulk_threshold: 1000
+:verbose: true
 gem: --no-ri --no-rdoc
+:backtrace: true
+:sources:
+- http://rubygems.org/
+#- http://localhost:9292
+:benchmark: false
