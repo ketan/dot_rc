@@ -1,3 +1,5 @@
+--context=3
+--follow
 --type-add=css=.scss
 --ignore-dir=vendor/jruby
 --ignore-dir=vendor/twist-libs

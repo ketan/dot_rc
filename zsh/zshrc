@@ -19,3 +19,7 @@ function releng(){
 	fi
 }
 
+function mvim() {
+  (unset GEM_PATH GEM_HOME; command mvim "$@")
+}
+
