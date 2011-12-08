@@ -1,6 +1,7 @@
 --context=3
 --follow
 --type-add=css=.scss
+--type-add=ruby=.gemspec
 --ignore-dir=vendor/jruby
 --ignore-dir=vendor/twist-libs
 --ignore-dir=vendor/twist-test-libs

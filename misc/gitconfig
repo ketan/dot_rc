@@ -3,7 +3,7 @@
 	email = KetanPadegaonkar@gmail.com
 [alias]
 	co = checkout
-	ci = commit
+	ci = commit -a
 	di = diff
   br = branch
 	st = status
