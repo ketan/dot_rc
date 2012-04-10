@@ -3,7 +3,7 @@
 # setup exports
 ###
 
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:/opt/local/lib/postgresql84/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
 
