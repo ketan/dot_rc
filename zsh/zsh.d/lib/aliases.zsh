@@ -12,8 +12,8 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
-alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
-alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
+alias mysqlstart='sudo mysqld_safe &'
+alias mysqlstop='mysqladmin -u root -p shutdown'
 
 alias reload="source ~/.zshrc"
 
