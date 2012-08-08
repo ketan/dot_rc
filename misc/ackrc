@@ -15,4 +15,4 @@
 --ignore-dir=help/build
 --ignore-dir=tmp
 --ignore-dir=log
-
+--ignore-dir=.bundle/ruby
