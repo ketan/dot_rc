@@ -2,6 +2,7 @@
 --follow
 --type-add=css=.scss
 --type-add=ruby=.gemspec
+--type-add=js=.json
 --ignore-dir=vendor/jruby
 --ignore-dir=vendor/twist-libs
 --ignore-dir=vendor/twist-test-libs
