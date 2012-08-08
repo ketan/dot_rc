@@ -1,4 +1,3 @@
--f tmp/tags
 --exclude=vendor/jruby
 --exclude=vendor/twist-libs
 --exclude=vendor/twist-test-libs
