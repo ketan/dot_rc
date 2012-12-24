@@ -8,7 +8,7 @@ end
 
 task :install => []
 
-Dir["*/Rakefile.rb"].each {|file| require file}
+Dir["*/Rakefile"].each {|file| load file}
 
 desc 'the default task'
 task :default => [:install]
