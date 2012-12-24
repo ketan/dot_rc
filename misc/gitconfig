@@ -10,7 +10,8 @@
 	br = branch
 	addremove = !"git add --all"
 	arm = !git addremove
-	out = log origin..HEAD
+  in = !"git fetch && git log HEAD..origin/master"
+  out = !"git fetch && git log origin/master..HEAD"
 	server = !"git daemon --reuseaddr --base-path=. --export-all"
 	browse = instaweb --httpd=webrick
 	lg = log -p
@@ -43,3 +44,5 @@
 [core]
 	excludesfile = /Users/ketanpadegaonkar/.gitignore
 
+[push]
+  default = matching
