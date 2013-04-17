@@ -1,0 +1,43 @@
+namespace :rbenv do
+
+  task :rbenv do
+    if File.exist?("#{ENV['HOME']}/.rbenv")
+      cd "#{ENV['HOME']}/.rbenv" do
+        sh("git pull")
+      end
+    else
+      sh("git clone git://github.com/sstephenson/rbenv.git ~/.rbenv")
+    end
+  end
+
+  task :plugins => :rbenv do
+    {
+      'ruby-build'          => 'git://github.com/sstephenson/ruby-build.git',
+      # 'rbenv-gem-rehash'    => 'git://github.com/sstephenson/rbenv-gem-rehash.git',
+      # 'rbenv-default-gems'  => 'git://github.com/sstephenson/rbenv-default-gems.git',
+      'rbenv-gemset'        => 'git://github.com/jamis/rbenv-gemset.git',
+
+      'rbenv-update'        => 'git://github.com/rkh/rbenv-update.git',
+      'rbenv-whatis'        => 'git://github.com/rkh/rbenv-whatis.git',
+      'rbenv-use'           => 'git://github.com/rkh/rbenv-use.git',
+    }.each do |name, url|
+      if File.exist?("#{ENV['HOME']}/.rbenv/plugins/#{name}")
+        cd "#{ENV['HOME']}/.rbenv/plugins/#{name}" do
+          sh("git pull")
+        end
+      else
+        sh("git clone #{url} ~/.rbenv/plugins/#{name}")
+      end
+    end
+  end
+
+  task :configure do
+    my_symlink('default-gems', __FILE__, '~/.rbenv/default-gems')
+    mkdir_p("#{ENV['HOME']}/.rbenv/cache")
+  end
+end
+
+desc "Install rbenv"
+task :rbenv => ['rbenv:rbenv', 'rbenv:plugins', 'rbenv:configure']
+
+task :install => 'rbenv'
