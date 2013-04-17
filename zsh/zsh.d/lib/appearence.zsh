@@ -16,6 +16,8 @@ bindkey -e				# use emacs style keys
 LESSOPEN=''
 if [ -f /usr/bin/lesspipe ]; then
   LESSOPEN="/usr/bin/lesspipe"
+elif [ -f /usr/bin/lesspipe.sh ]; then
+  LESSOPEN="/usr/bin/lesspipe"
 elif [ -f /opt/local/bin/lesspipe.sh ]; then
   LESSOPEN="/opt/local/bin/lesspipe.sh"
 fi
@@ -44,9 +46,9 @@ fi
 
 # set some colors
 for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE BLACK; do
-    eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'        
+    eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'
     eval PR_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done                                                
+done
 PR_RESET="%{${reset_color}%}";
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
@@ -56,7 +58,7 @@ PR_NO_COLOR="%{$terminfo[sgr0]%}"
 #     echo $branch
 #     return
 #   fi
-#   
+#
 #   branch=`hg branch 2>/dev/null`
 #   if [[ -n $branch ]]; then
 #     echo $branch | sed -e 's/^/hg (/' -e 's/$/)/'
@@ -68,7 +70,7 @@ PR_NO_COLOR="%{$terminfo[sgr0]%}"
 # ###
 # function precmd {
 #   export PS1="
-#   
+#
 # ${PR_BLUE}$(rvm-prompt)${PR_NO_COLOR}
 # $PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~ $PR_RED$(parse_git_branch)$PR_NO_COLOR%(!.#.$) "
 # }
