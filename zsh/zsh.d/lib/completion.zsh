@@ -27,7 +27,7 @@ export WORDCHARS="${WORDCHARS:s#.#}"	# alt+bksp stops at '.'
 ###
 # ssh host completion
 ###
-zstyle -e ':completion:*:(ssh|scp):*' hosts 'reply=(
+zstyle -e ':completion:*:(ssh|scp|telnet|rsync):*' hosts 'reply=(
   ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) \
        /dev/null)"}%%[# ]*}//,/ }
   ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2>/dev/null))"}%%\#*}

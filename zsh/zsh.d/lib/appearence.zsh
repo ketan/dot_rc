@@ -14,15 +14,15 @@ bindkey -e				# use emacs style keys
 
 # filter for less
 LESSOPEN=''
+
 if [ -f /usr/bin/lesspipe ]; then
   LESSOPEN="/usr/bin/lesspipe"
 elif [ -f /usr/bin/lesspipe.sh ]; then
-  LESSOPEN="/usr/bin/lesspipe"
+  LESSOPEN="/usr/bin/lesspipe.sh"
 elif [ -f /opt/local/bin/lesspipe.sh ]; then
   LESSOPEN="/opt/local/bin/lesspipe.sh"
 fi
 export LESSOPEN="| $LESSOPEN %s"
-
 
 export PAGER='less'
 export EDITOR='vim'

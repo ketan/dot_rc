@@ -23,3 +23,5 @@ function mvim() {
   (unset GEM_PATH GEM_HOME; command mvim "$@")
 }
 
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
