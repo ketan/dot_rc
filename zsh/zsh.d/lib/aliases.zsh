@@ -37,3 +37,11 @@ alias ls='ls --color=auto -hF'
 # alias du='gdu'
 # alias df='gdf'
 alias ikill="ps axu | grep Developer | grep -v Xcode.app | grep -v grep | awk '{print \$2}' | xargs kill -9"
+
+path() {
+  echo $PATH | tr ":" "\n"
+}
+
+if [[ $OSTYPE == darwin* ]]; then
+  pman() { man $1 -t | open -f -a Preview }
+fi

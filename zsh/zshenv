@@ -3,15 +3,21 @@
 # setup exports
 ###
 
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_CTYPE="${LC_CTYPE:-UTF-8}"
+
 export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 export MANPATH=/opt/local/share/man:$MANPATH		# macports man
 
-export PATH=$PATH:/usr/texbin
-
 export HOSTNAME="`hostname`"
 
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then
+  # fpath=(~/.zsh/zsh.d/completion $fpath)
+#  . $HOME/.rvm/scripts/rvm
+#   PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
 
-export JAVA_OPTS='-d32 -client'
-
+if [[ -d $HOME/.rbenv/bin ]]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"
+fi

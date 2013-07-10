@@ -30,9 +30,6 @@ function precmd {
   vcs_info 'prompt'
 }
 
-function ___rvm_prompt {
-  "${ruby_string}"
-}
 function prompt {
     local brackets=$1
     local color1=$2
@@ -48,10 +45,18 @@ function prompt {
     local user_host="${color2}%m"
     local vcs_cwd='${${vcs_info_msg_1_%%.}/$HOME/~}'
     local r_cwd="${color2}%B${vcs_cwd}%<<%b"
-    local rvm_string='${${GEM_HOME}/$rvm_path\/gems\/}'
+    local ruby_version=""
+
+    if [ -n "$rvm_version" ]; then
+      local ruby_version='${${GEM_HOME}/$rvm_path\/gems\/}'
+    fi
+
+    if type rbenv | grep -q 'shell function'; then
+      local ruby_version='$(rbenv version | awk "{print \$1}")@$(rbenv gemset active | grep -v "no active gemsets" | cut -d" " -f1)'
+    fi
 
     PROMPT="
-${PR_BLUE}${rvm_string}${PR_NO_COLOR}
+${PR_BLUE}${ruby_version}${PR_NO_COLOR}
 ${user_host}${colon}${PR_NO_COLOR}${bracket_open}${git}${r_cwd}${bracket_close}
 %# ${PR_NO_COLOR}"
 }
