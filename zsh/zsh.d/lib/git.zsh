@@ -11,7 +11,7 @@ function precmd {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  
+
   local FMT_BRANCH="${PR_GREEN}%b${PR_NO_COLOR}"        # e.g. master
   local FMT_ACTION="(${PR_CYAN}%a${PR_NO_COLOR}%)"      # e.g. (rebase-i)
   local FMT_PATH="%R${PR_YELLOW}/%S"                    # e.g. ~/repo/subdir
@@ -25,8 +25,8 @@ function precmd {
   zstyle ':vcs_info:*:prompt:*' formats           "${FMT_BRANCH}//"               "${FMT_PATH} ${FMT_ANOTATION}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats       ""                              "%~"
   zstyle ':vcs_info:hg*:*'      get-bookmarks     true
-  
-  
+
+
   vcs_info 'prompt'
 }
 
@@ -52,7 +52,7 @@ function prompt {
     fi
 
     if type rbenv | grep -q 'shell function'; then
-      local ruby_version='$(rbenv version | awk "{print \$1}")@$(rbenv gemset active | grep -v "no active gemsets" | cut -d" " -f1)'
+      local ruby_version='$(cat .ruby-version 2>/dev/null)@$(cat .rbenv-gemsets 2>/dev/null)'
     fi
 
     PROMPT="
