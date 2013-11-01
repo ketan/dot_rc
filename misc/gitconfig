@@ -1,48 +1,67 @@
 [user]
 	name = Ketan Padegaonkar
 	email = KetanPadegaonkar@gmail.com
+
 [alias]
 	co = checkout
 	ci = commit -a
 	di = diff
-  br = branch
+	br = branch
 	st = status
 	br = branch
 	addremove = !"git add --all"
 	arm = !git addremove
-  in = !"git fetch && git log HEAD..origin/master"
-  out = !"git fetch && git log origin/master..HEAD"
+	in = !"git fetch && git log HEAD..origin/master"
+	out = !"git fetch && git log origin/master..HEAD"
 	server = !"git daemon --reuseaddr --base-path=. --export-all"
 	browse = instaweb --httpd=webrick
 	lg = log -p
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  ls = ls-files
-  cln = !"git clean -fdxn | sed -e 's/Would remove //' | grep -v 'vendor' | grep -v '.bundle' | grep -v '.metadata' | grep -v '.tmproj' | grep -v '.rvmrc' | xargs git clean -fdx"
-  clna = clean -fdx
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls = ls-files
+	cln = !"git clean -fdxn | sed -e 's/Would remove //' | grep -v 'vendor' | grep -v '.bundle' | grep -v '.metadata' | grep -v '.tmproj' | grep -v '.rvmrc' | xargs git clean -fdx"
+	clna = clean -fdx
+
 [color]
 	branch = auto
 	diff = auto
 	status = auto
+
 [color "branch"]
 	current = yellow reverse
 	local = yellow
 	remote = green
+
 [color "diff"]
 	meta = yellow bold
 	frag = magenta bold
 	old = red bold
 	new = green bold
+
 [color "status"]
 	added = yellow
 	changed = green
 	untracked = cyan
+
 [daemon]
-  receivepack = true
+	receivepack = true
+
 [receive]
 	denycurrentbranch = ignore
+
 [core]
 	excludesfile = /Users/ketanpadegaonkar/.gitignore
 
+[heroku]
+	account = personal
+
 [push]
-  default = matching
+	default = upstream
+
+
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = ketanpadegaonkar@gmail.com
+	smtpserverport = 587
+

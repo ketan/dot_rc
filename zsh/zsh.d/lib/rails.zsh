@@ -6,7 +6,7 @@ function r(){
   if [ -f script/rails ]; then
     script/rails $*
   fi
-  
+
   if [ -f script/server ]; then
     SCRIPT=$1
     shift
@@ -22,11 +22,11 @@ function jr(){
   elif [ -x './script/jruby' ]; then
     ruby='./script/jruby'
   fi
-  
+
   if [ -f script/rails ]; then
     $ruby script/rails $*
   fi
-  
+
   if [ -f script/server ]; then
     SCRIPT=$1
     shift
@@ -71,3 +71,7 @@ function m(){
 }
 
 alias gem_cache='(cd ~/Downloads/scache; java -cp . scache)'
+
+export RUBY_GC_MALLOC_LIMIT=1000000000
+export RUBY_FREE_MIN=500000
+export RUBY_HEAP_MIN_SLOTS=40000
