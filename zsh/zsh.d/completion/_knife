@@ -1,21 +1,12 @@
 #compdef knife
-# ------------------------------------------------------------------------------
-# Description
-# -----------
-#
-#  Completion script for Chef's knife (http://www.opscode.com/chef).
-#
-#  Source: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/knife
-#
-# ------------------------------------------------------------------------------
-# Authors
-# -------
-#
-#  * Frank Louwers (https://github.com/franklouwers)
-#  * Mark Cornick (https://github.com/markcornick)
-#
-# ------------------------------------------------------------------------------
 
+# You can override the path to knife.rb and your cookbooks by setting
+# KNIFE_CONF_PATH=/path/to/my/.chef/knife.rb
+# KNIFE_COOKBOOK_PATH=/path/to/my/chef/cookbooks
+# Read around where these are used for more detail.
+
+# These flags should be available everywhere according to man knife
+knife_general_flags=( --help --server-url --key --config --editor --format --log_level --logfile --no-editor --user --print-after --version --yes )
 
 # knife has a very special syntax, some example calls are:
 # knife status
@@ -29,10 +20,6 @@
 _knife() {
   local curcontext="$curcontext" state line
   typeset -A opt_args
-
-  # These flags should be available everywhere according to man knife
-  knife_general_flags=( --help --server-url --key --config --editor --format --log_level --logfile --no-editor --user --print-after --version --yes --environment )
-
   cloudproviders=(bluebox ec2 rackspace slicehost terremark)
   _arguments \
     '1: :->knifecmd'\
@@ -44,7 +31,7 @@ _knife() {
   
   case $state in
   knifecmd)
-    compadd -Q "$@" bootstrap client configure cookbook "cookbook site" "data bag" environment exec index node recipe role search ssh status windows $cloudproviders
+    compadd -Q "$@" bootstrap client configure cookbook "cookbook site" "data bag" diff exec environment index node recipe role search ssh status upload vault windows $cloudproviders
   ;;
   knifesubcmd)
     case $words[2] in
@@ -60,8 +47,11 @@ _knife() {
     cookbook)
       compadd -Q "$@" test list create download delete "metadata from" show "bulk delete" metadata upload
     ;;
+    diff)
+      _arguments '*:file or directory:_files -g "*"'
+    ;;
     environment)
-      compadd -Q "$@" create delete edit "from file" list show
+      compadd -Q "$@" list create delete edit show "from file"
     ;;
     node)
      compadd -Q "$@" "from file" create show edit delete list run_list "bulk delete"
@@ -72,6 +62,12 @@ _knife() {
     role)
       compadd -Q "$@" "bulk delete" create delete edit "from file" list show
     ;; 
+    upload)
+     _arguments '*:file or directory:_files -g "*"'
+    ;;
+    vault)
+      compadd -Q "$@" create decrypt delete edit remove "rotate all keys" "rotate keys" show update
+    ;;
     windows)
       compadd "$@" bootstrap
     ;;
@@ -114,7 +110,7 @@ _knife() {
           versioncomp=1
           _arguments '4:Cookbookversions:($(_cookbook_versions) latest)'
        ;;
-       (node|client|role|environment)
+       (node|client|role)
          compadd "$@" --attribute
        esac
      esac
@@ -159,36 +155,42 @@ _knife_options3() {
 
 # The chef_x_remote functions use knife to get a list of objects of type x on the server
 _chef_roles_remote() {
- (knife role list | awk '{print $1}')
+ (knife role list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_clients_remote() {
- (knife client list | awk '{print $1}')
+ (knife client list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_nodes_remote() {
- (knife node list | awk '{print $1}')
+ (knife node list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_cookbooks_remote() {
- (knife cookbook list | awk '{print $1}')
+ (knife cookbook list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_sitecookbooks_remote() {
- (knife cookbook site list | awk '{print $1}')
+ (knife cookbook site list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_data_bags_remote() {
- (knife data bag list | awk '{print $1}')
+ (knife data bag list --format json | grep \" | awk '{print $1}' | awk -F"," '{print $1}' | awk -F"\"" '{print $2}')
 }
 
 _chef_environments_remote() {
- (knife environment list | awk '{print $1}')
+  (knife environment list | awk '{print $1}')
 }
 
 # The chef_x_local functions use the knife config to find the paths of relevant objects x to be uploaded to the server
 _chef_cookbooks_local() {
- (for i in $( grep cookbook_path $HOME/.chef/knife.rb | awk 'BEGIN {FS = "[" }; {print $2}' | sed 's/\,//g' | sed "s/'//g" | sed 's/\(.*\)]/\1/' ); do ls $i; done)
+  
+  local knife_rb=${KNIFE_CONF_PATH:-${HOME}/.chef/knife.rb}
+  if [ -f ./.chef/knife.rb ]; then
+    knife_rb="./.chef/knife.rb"
+  fi
+  local cookbook_path=${KNIFE_COOKBOOK_PATH:-$(grep cookbook_path $knife_rb | awk 'BEGIN {FS = "[" }; {print $2}' | sed 's/\,//g' | sed "s/'//g" | sed 's/\(.*\)]/\1/' )}
+  (for i in $cookbook_path; do ls $i; done)
 }
 
 # This function extracts the available cookbook versions on the chef server
@@ -197,11 +199,3 @@ _cookbook_versions() {
 }
 
 _knife "$@"
-
-# Local Variables:
-# mode: Shell-Script
-# sh-indentation: 2
-# indent-tabs-mode: nil
-# sh-basic-offset: 2
-# End:
-# vim: ft=zsh sw=2 ts=2 et
