@@ -1,9 +1,15 @@
 --exclude=vendor/jruby
---exclude=vendor/twist-libs
---exclude=vendor/twist-test-libs
---exclude=vendor/ruby/**/_test.rb
---exclude=vendor/ruby/**/_spec.rb
---langmap=ruby:+.rake.builder.rjs.erb
+--exclude=*.c
+--exclude=*.h
+--exclude=*.cpp
+--exclude=*.hpp
+--exclude=*.java
+--exclude=Makefile
+--exclude=*/ext/*
+--exclude=*/examples/*
+--exclude=vendor/*/spec/*.*
+--exclude=vendor/*/test/*.*
+--langmap=ruby:+.rake.builder.rjs.erb.jbuilder
 -R
 --langdef=js
 --langmap=js:.js
@@ -15,5 +21,3 @@
 --regex-js=/([^= ]+)[ \t]*=[ \t]*[^']"[^"]*/\1/,string/
 --regex-js=/["']?([A-Za-z0-9_$]+)["']?((\.prototype)?(\.[A-Za-z0-9_$]+))?[ \t]*[:=][ \t]*function/\1\4/f,function/
 --regex-js=/function[ \t]+([A-Za-z0-9_$]+)/\1/f,function/
-
-

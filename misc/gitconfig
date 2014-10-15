@@ -3,44 +3,46 @@
 	email = KetanPadegaonkar@gmail.com
 
 [alias]
-	co = checkout
-	ci = commit -a
-	di = diff
-	br = branch
-	st = status
-	br = branch
 	addremove = !"git add --all"
-	arm = !git addremove
-	in = !"git fetch && git log HEAD..origin/master"
-	out = !"git fetch && git log origin/master..HEAD"
-	server = !"git daemon --reuseaddr --base-path=. --export-all"
-	browse = instaweb --httpd=webrick
-	lg = log -p
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	ls = ls-files
-	cln = !"git clean -fdxn | sed -e 's/Would remove //' | grep -v 'vendor' | grep -v '.bundle' | grep -v '.metadata' | grep -v '.tmproj' | grep -v '.rvmrc' | xargs git clean -fdx"
-	clna = clean -fdx
+	arm       = !git addremove
+	br        = branch
+	br        = branch
+	browse    = instaweb --httpd=webrick
+	ci        = commit -a
+	cln       = !"git clean -fdxn | sed -e 's/Would remove //' | grep -v 'vendor' | grep -v '.bundle' | grep -v '.metadata' | grep -v '.tmproj' | grep -v '.rvmrc' | xargs git clean -fdx"
+	clna      = clean -fdx
+	co        = checkout
+	di        = diff
+	in        = !"git fetch && git log HEAD..origin/master"
+	lg        = log -p
+	lg1       = log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --abbrev-commit --date=relative --max-count=50
+	lol       = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola      = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls        = ls-files
+	out       = !"git fetch && git log origin/master..HEAD"
+	server    = !"git daemon --reuseaddr --base-path=. --export-all"
+	st        = status
+
 
 [color]
 	branch = auto
-	diff = auto
+	diff   = auto
 	status = auto
 
 [color "branch"]
 	current = yellow reverse
-	local = yellow
-	remote = green
+	local   = yellow
+	remote  = green
 
 [color "diff"]
 	meta = yellow bold
 	frag = magenta bold
-	old = red bold
-	new = green bold
+	old  = red bold
+	new  = green bold
 
 [color "status"]
-	added = yellow
-	changed = green
+	added     = yellow
+	changed   = green
 	untracked = cyan
 
 [daemon]
@@ -58,10 +60,18 @@
 [push]
 	default = upstream
 
-
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
 	smtpuser = ketanpadegaonkar@gmail.com
 	smtpserverport = 587
 
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

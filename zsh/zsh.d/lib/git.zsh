@@ -52,7 +52,7 @@ function prompt {
     fi
 
     if type rbenv | grep -q 'shell function'; then
-      local ruby_version='$(cat .ruby-version 2>/dev/null)@$(cat .rbenv-gemsets 2>/dev/null)'
+      local ruby_version='$(cat .ruby-version 2>/dev/null)@$(cat .ruby-gemset 2>/dev/null)'
     fi
 
     PROMPT="

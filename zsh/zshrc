@@ -4,13 +4,14 @@ if [ -z "$PS1" ]; then
   return
 fi
 
-for config_file (~/.zsh/zsh.d/lib/*.zsh) source $config_file
+for config_file (~/.zsh/zsh.d/lib/*.zsh); do
+  source $config_file
+done
 
 for i in $HOME/projects/*/*; do
   dir=$i:t
   hash -d $dir=$i
 done
-
 
 function releng(){
 	dir=`ls -d *releng* 2>/dev/null`
@@ -24,4 +25,5 @@ function mvim() {
 }
 
 ### Added by the Heroku Toolbelt
+
 export PATH="/usr/local/heroku/bin:$PATH"
