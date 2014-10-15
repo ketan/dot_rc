@@ -1,6 +1,9 @@
 #!/bin/zsh
 
-export JAVA_HOME=${JAVA_HOME:-$(/usr/libexec/java_home)}
+if [ -f '/usr/libexec/java_home' ]; then
+  export JAVA_HOME=${JAVA_HOME:-$(/usr/libexec/java_home)}
+fi
+
 export EC2_HOME=${HOME}/local/ec2-api-tools
 export AWS_CLOUDFORMATION_HOME=${HOME}/local/cloud-formation
 export EC2_AMITOOL_HOME=${HOME}/local/ec2-ami-tools

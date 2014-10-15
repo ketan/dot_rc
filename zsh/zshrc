@@ -8,10 +8,13 @@ for config_file (~/.zsh/zsh.d/lib/*.zsh); do
   source $config_file
 done
 
-for i in $HOME/projects/*/*; do
-  dir=$i:t
-  hash -d $dir=$i
-done
+if [ -d $HOME/projects ];
+then
+  for i in $HOME/projects/*/*; do
+    dir=$i:t
+    hash -d $dir=$i
+  done
+fi
 
 function releng(){
 	dir=`ls -d *releng* 2>/dev/null`

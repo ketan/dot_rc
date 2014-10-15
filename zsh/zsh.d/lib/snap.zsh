@@ -12,6 +12,11 @@ case $(uname -o) in
 
   ;;
   GNU/Linux)
+    for i in $HOME/src/*; do
+        dir=$i:t
+        hash -d $dir=$i
+    done
+
     export JAVA_HOME=/opt/local/java/1.8
     export PATH=$JAVA_HOME/bin:$PATH
 
@@ -26,7 +31,7 @@ case $(uname -o) in
     export BUNDLE_JOBS=4
 
     fpath=(/go-saas-src/go-saas-chef/scripts/completion $fpath)
-    autoload -Uz compinit && compinit
+    autoload -Uz compinit && compinit -u
 
   ;;
 esac

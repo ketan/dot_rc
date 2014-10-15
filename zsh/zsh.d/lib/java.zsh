@@ -3,10 +3,17 @@ if [ -z "$PS1" ]; then
   return
 fi
 
-alias setjdk16='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
-alias setjdk17='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
-alias setjdk18='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+function setjdk16(){
+  [ -f '/usr/libexec/java_home' ] && export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
+}
 
+function setjdk17(){
+  [ -f '/usr/libexec/java_home' ] && export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+}
+
+function setjdk18(){
+  [ -f '/usr/libexec/java_home' ] && export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+}
 
 setjdk18
 
