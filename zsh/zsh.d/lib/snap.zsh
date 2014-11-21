@@ -20,7 +20,7 @@ case $(uname -o) in
     export JAVA_HOME=/opt/local/java/1.8
     export PATH=$JAVA_HOME/bin:$PATH
 
-    export PATH=/opt/local/ruby/2.0.0-p353/bin:$PATH
+    export PATH=/opt/local/ruby/2.0.0-p598/bin:$PATH
     export PATH=/opt/local/python/2.7.5/bin:$PATH
     export PATH=/opt/local/nodejs/0.10.28/bin:$PATH
     export PATH=/opt/local/awscli/bin:$PATH
