@@ -13,6 +13,8 @@ task :zsh do
     f.gsub!(/^\.\//, '')
     my_symlink("../#{f}", __FILE__ , "~/.#{f}")
   end
+
+  sh("curl --silent --fail --location https://raw.githubusercontent.com/github/hub/master/etc/hub.zsh_completion > ~/.zsh/zsh.d/completion/_hub")
 end
 
 task :install => :zsh

@@ -20,6 +20,7 @@ namespace :rbenv do
       'rbenv-update'        => 'git://github.com/rkh/rbenv-update.git',
       'rbenv-whatis'        => 'git://github.com/rkh/rbenv-whatis.git',
       'rbenv-use'           => 'git://github.com/rkh/rbenv-use.git',
+      'rbenv-aliases'       => 'git://github.com/tpope/rbenv-aliases',
     }.each do |name, url|
       if File.exist?("#{ENV['HOME']}/.rbenv/plugins/#{name}")
         cd "#{ENV['HOME']}/.rbenv/plugins/#{name}" do
